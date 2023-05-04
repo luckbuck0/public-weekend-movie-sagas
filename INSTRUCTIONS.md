@@ -96,7 +96,7 @@ The Add Movie page should have the buttons:
 
 ### 2. Refresh on Details Page
 Allow the app to maintain on refresh our details page.
-Research the [useParams](https://reactrouter.com/en/main/hooks/use-params) hook for React Router v6.
+Research [URL Params](https://v5.reactrouter.com/web/example/url-params) for React Router v5.
 
 ### 3. Edit Page (Stretch)
 Add to the detail page an edit button that brings the user to the edit page.
@@ -116,7 +116,7 @@ The edit page should have the buttons:
 - [ ] Display the current values in the input (title) and textarea (description) on the Edit Page
 - [ ] Display all genres on movie list page. Research JSON_AGG to make this possible.
 - [ ] Move sagas and reducers out of your `index.js` and into separate files (ideally in `src/redux/reducers` and `src/redux/sagas` folders).
-- [ ] Allow the user to refresh the details or edit page. The url for the details page would be something like `/details/1` for movie with id of `1`. Research the [useParams](https://reactrouter.com/en/main/hooks/use-params) hook for React Router v6.
+- [ ] Allow the user to refresh the details or edit page. The url for the details page would be something like `/details/1` for movie with id of `1`. Research [URL Params](https://v5.reactrouter.com/web/example/url-params) for React Router v5.
 - [ ] Allow the user to add a genre to a movie.
 - [ ] Allow the user to remove a genre from a movie.
 - [ ] Only display the top 10 movies, and allow the user to search for movie titles with a search bar on the home page (you can do this on the client side or the server side, server side is a bigger stretch, but good practice).
