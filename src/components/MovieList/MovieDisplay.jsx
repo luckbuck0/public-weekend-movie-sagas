@@ -14,7 +14,7 @@ function MovieDisplay(props) {
             type: 'CLICKED_MOVIE',
             payload: movie
         })
-            history.push('/DetailsPage') 
+            history.push('/DetailPage') 
         }
 
     return ( 
