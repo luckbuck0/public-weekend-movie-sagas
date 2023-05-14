@@ -1,4 +1,12 @@
 
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
+import Typography from '@mui/material/Typography';
+import { Button, CardActionArea, CardActions } from '@mui/material'
+
+
+//----------------------------------------------------------
 import { useDispatch, useSelector } from "react-redux";
 import logger from "redux-logger";
 import { useEffect } from "react";
@@ -35,21 +43,43 @@ function DetailsPage(){
     
 
     return (
-        <div>
+        <section className="movies">
+        <Card sx={{ maxWidth: 345, alignContent: 'center' } }>
+        <div  key={clickedMovie.id}>
            <h3>{clickedMovie.title}</h3>
-                           
-                           <img src={clickedMovie.poster} alt={clickedMovie.title}/>
-                           {/* <p className="genres">{genre}</p> */}
-                           {
-                            genre.map((item) =>{
-                                return (
-                                    <p>{item}</p>
-                                )
-                            })
-                           }
-                           <p>{clickedMovie.description}</p>  
-                           <button onClick={()=>{history.push('/')}}>BACK</button>     
+            <CardActionArea>   
+                <CardMedia
+                component = "img"
+                height ="fit-content"
+                width= "fit-content"
+                image = {clickedMovie.poster}
+                alt = "poster"
+                />         
+            <CardContent>
+           
+           {/* <p className="genres">{genre}</p> */}
+           <Typography variant="body2" color="text.secondary">
+           {
+            genre.map((item) =>{
+                return (
+                    <p>{item}</p>
+                )
+           })
+           }
+          </Typography>
+           
+           <Typography gutterBottom variant="h5" component="div">
+           {clickedMovie.description}
+          </Typography>
+          <Button onClick={()=>{history.push('/')}}  size="large" color="secondary">
+          Back
+        </Button>
+           </CardContent>
+           </CardActionArea>  
+              
         </div>
+        </Card>
+        </section>
     )
 }
 
