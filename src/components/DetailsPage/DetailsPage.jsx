@@ -2,9 +2,11 @@
 import { useDispatch, useSelector } from "react-redux";
 import logger from "redux-logger";
 import { useEffect } from "react";
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 
 function DetailsPage(){
 
+    const history = useHistory()
     const dispatch = useDispatch()
 
     const clickedMovie = useSelector((store) => store.clickedMovie)
@@ -45,7 +47,8 @@ function DetailsPage(){
                                 )
                             })
                            }
-                           <p>{clickedMovie.description}</p>       
+                           <p>{clickedMovie.description}</p>  
+                           <button onClick={()=>{history.push('/')}}>BACK</button>     
         </div>
     )
 }
