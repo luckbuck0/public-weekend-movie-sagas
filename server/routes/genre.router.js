@@ -5,17 +5,16 @@ const pool = require('../modules/pool')
 router.get('/', (req, res) => {
   // Add query to get all genres
 
-  const query = `SELECT "movies".title,
-  "genres".name ,
- "movies_genres".genre_id, "movies_genres".movie_id 
-FROM movies
-JOIN movies_genres
-ON movies_genres.genre_id= movies.id
-JOIN genres
-ON genres.id=movies_genres.movie_id
-GROUP BY "movies".id ,"movies".title ,"genres".id ,
- "genres".name , "movies_genres".genre_id,
-  "movies_genres".movie_id 
+  const query = `SELECT "movies".title ,"genres".name FROM 
+  movies
+  LEFT JOIN
+  movies_genres ON
+  movies_genres.movie_id= movies.id
+  JOIN 
+  genres
+  ON
+  genres.id=movies_genres.genre_id
+  GROUP BY "movies".title, "genres".name
  `;
   pool.query(query)
     .then( result => {

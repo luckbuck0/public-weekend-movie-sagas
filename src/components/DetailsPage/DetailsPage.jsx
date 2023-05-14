@@ -9,7 +9,21 @@ function DetailsPage(){
 
     const clickedMovie = useSelector((store) => store.clickedMovie)
     
+
     const genres = useSelector((store) => store.genres)
+
+
+    let genre=[]
+    for (let each of genres){
+        
+        if(clickedMovie.title == each.title){
+            genre.push(each.name)
+        }
+        }
+        console.log('this is the genre of the clicked movie---->',genre);
+
+    
+
     console.log('this is genres', genres);
     useEffect(() => {
         dispatch({
@@ -22,7 +36,15 @@ function DetailsPage(){
         <div>
            <h3>{clickedMovie.title}</h3>
                            
-                           <img src={clickedMovie.poster} alt={clickedMovie.title}/>  
+                           <img src={clickedMovie.poster} alt={clickedMovie.title}/>
+                           {/* <p className="genres">{genre}</p> */}
+                           {
+                            genre.map((item) =>{
+                                return (
+                                    <p>{item}</p>
+                                )
+                            })
+                           }
                            <p>{clickedMovie.description}</p>       
         </div>
     )
