@@ -1,6 +1,8 @@
 
 
 function DetailPage(){
+
+    
     return (
         <div>
             hi
