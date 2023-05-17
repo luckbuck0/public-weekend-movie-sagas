@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './components/App/App.js';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
+
+import { ThemeProvider, createTheme } from '@mui/material';
 // Provider allows us to use redux within our react app
 import { Provider } from 'react-redux';
 import logger from 'redux-logger';
@@ -11,9 +13,47 @@ import createSagaMiddleware from 'redux-saga';
 import { takeEvery, put } from 'redux-saga/effects';
 import axios from 'axios';
 
+
+const theme = createTheme({
+    palette:{
+        primary:{
+            main:"#CCC"
+        }
+    }
+})
+
 // Create the rootSaga generator function
 function* rootSaga() {
     yield takeEvery('FETCH_MOVIES', fetchAllMovies);
+    yield takeEvery('SAGA/GET_GENRES', fetchGenres)
+    
+}
+
+const clickedMovie = (state = [], action) => {
+    if (action.type === 'CLICKED_MOVIE') {
+        const movie = action.payload;
+        return movie;
+      }
+      return state;
+}
+
+function* fetchGenres(){
+    
+    try {
+        const response = yield axios({
+            method: 'GET',
+            url: '/api/genre'
+        })
+        console.log('>>>>>>>', response.data);
+
+        //const theBasket = response.data;
+        yield put({
+            type: 'SET_GENRES',
+            payload: response.data
+        })
+    } catch (error) {
+        console.log('Something broke SAGA/GET genres', error)
+    }
 }
 
 function* fetchAllMovies() {
@@ -57,6 +97,7 @@ const storeInstance = createStore(
     combineReducers({
         movies,
         genres,
+        clickedMovie
     }),
     // Add sagaMiddleware to our store
     applyMiddleware(sagaMiddleware, logger),
@@ -68,8 +109,10 @@ sagaMiddleware.run(rootSaga);
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <React.StrictMode>
+        <ThemeProvider theme={theme}>
         <Provider store={storeInstance}>
             <App />
         </Provider>
+        </ThemeProvider>
     </React.StrictMode>
 );
